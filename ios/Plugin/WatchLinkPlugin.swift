@@ -10,33 +10,39 @@ public class WatchLinkPlugin: CAPPlugin {
     private let implementation = WatchLink()
     private var call: CAPPluginCall?
 
-    @objc func activate(_ call: CAPPluginCall) {
-        call.resolve(implementation.activate().toDict())
+    @objc func connected(_ call: CAPPluginCall) {
+        call.resolve(implementation.connected().toDict())
     }
-    
+
     @objc func send(_ call: CAPPluginCall) {
-        let type = call.getString("type") ?? "message"
-        let message = call.getString("message") ?? ""
-        call.resolve(implementation.send(message: message, type: type).toDict())
+        guard let path = call.getString("path") else {
+            return WatchLinkResult(ok: false, error: "Path is required").toDict()
+        }
+
+        guard let message = call.getString("message") else {
+            return WatchLinkResult(ok: false, error: "Message is required").toDict()
+        }
+
+        call.resolve(implementation.send(message: message, path: path).toDict())
     }
-    
+
     @objc func listen(_ call: CAPPluginCall) {
         call.keepAlive = true
         self.call = call
-        
+
         _ = implementation.listen() { (message: [String: Any]) -> Void in
             if let callback = self.call {
                 callback.resolve(message)
             }
         }
     }
-    
+
     @objc func unlisten(_ call: CAPPluginCall) {
         if let callback = self.call {
             callback.keepAlive = false
             self.call = nil;
         }
-        
+
         call.resolve();
     }
 }

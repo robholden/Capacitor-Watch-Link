@@ -1,21 +1,24 @@
-# watch-link
+# Capacitor Watch Link
 
-Watch link
+A plugin for Capacitor to link an application to WatchOs and WearOs
 
 ## Install
 
-```bash
-npm install watch-link
+TODO (not ready for production yet)
+
+<!-- ```bash
+npm install capacitor-watch-link
 npx cap sync
-```
+``` -->
 
 ## API
 
 <docgen-index>
 
-* [`activate()`](#activate)
+* [`connected(...)`](#connected)
 * [`send(...)`](#send)
 * [`listen(...)`](#listen)
+* [`unlisten()`](#unlisten)
 * [Interfaces](#interfaces)
 
 </docgen-index>
@@ -23,11 +26,15 @@ npx cap sync
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### activate()
+### connected(...)
 
 ```typescript
-activate() => Promise<WatchLinkResult>
+connected(options?: WatchConnectedOptions | undefined) => Promise<WatchLinkResult>
 ```
+
+| Param         | Type                                                                    |
+| ------------- | ----------------------------------------------------------------------- |
+| **`options`** | <code><a href="#watchconnectedoptions">WatchConnectedOptions</a></code> |
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
@@ -37,12 +44,12 @@ activate() => Promise<WatchLinkResult>
 ### send(...)
 
 ```typescript
-send(options: { message: string; type?: string; }) => Promise<WatchLinkResult>
+send(options: WatchSendOptions) => Promise<WatchLinkResult>
 ```
 
-| Param         | Type                                             |
-| ------------- | ------------------------------------------------ |
-| **`options`** | <code>{ message: string; type?: string; }</code> |
+| Param         | Type                                                          |
+| ------------- | ------------------------------------------------------------- |
+| **`options`** | <code><a href="#watchsendoptions">WatchSendOptions</a></code> |
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
@@ -64,6 +71,15 @@ listen(callback: (result: { [key: string]: string; }) => any) => Promise<WatchLi
 --------------------
 
 
+### unlisten()
+
+```typescript
+unlisten() => Promise<void>
+```
+
+--------------------
+
+
 ### Interfaces
 
 
@@ -73,5 +89,21 @@ listen(callback: (result: { [key: string]: string; }) => any) => Promise<WatchLi
 | ----------- | -------------------- |
 | **`ok`**    | <code>boolean</code> |
 | **`error`** | <code>string</code>  |
+
+
+#### WatchConnectedOptions
+
+| Prop             | Type                 | Description                                                 |
+| ---------------- | -------------------- | ----------------------------------------------------------- |
+| **`nearbyOnly`** | <code>boolean</code> | [WearOS ONLY] Set to [true] to only look for nearby watches |
+
+
+#### WatchSendOptions
+
+| Prop             | Type                 | Description                                                             |
+| ---------------- | -------------------- | ----------------------------------------------------------------------- |
+| **`path`**       | <code>string</code>  | [WearOS] =&gt; the message prefix [WatchOs] =&gt; the message key       |
+| **`message`**    | <code>string</code>  | The message to send to the watch(es)                                    |
+| **`nearbyOnly`** | <code>boolean</code> | [WearOS ONLY] Set to [true] to only send to the nearest connected watch |
 
 </docgen-api>

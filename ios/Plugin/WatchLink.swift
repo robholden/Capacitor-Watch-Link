@@ -26,16 +26,18 @@ class WatchLink: NSObject, WCSessionDelegate {
         self.session = session
         super.init()
         self.session.delegate = self
+        self.session.activate()
     }
 
-    func connected() {
+    func connected() -> WatchLinkResult {
+        if (self.session.activationState != WCSessionActivationState.activated) {
+            return WatchLinkResult(ok: false, error: "WCSession is not activated (\(self.session.activationState)")
+        }
+        
         return WatchLinkResult(ok: self.session.isReachable)
     }
 
     func send(message: String, path: String) -> WatchLinkResult {
-        WatchLinkResult active = self.activate()
-        if (!active.ok) return active
-
         if (self.session.activationState != WCSessionActivationState.activated) {
             return WatchLinkResult(ok: false, error: "WCSession is not activated (\(self.session.activationState)")
         }

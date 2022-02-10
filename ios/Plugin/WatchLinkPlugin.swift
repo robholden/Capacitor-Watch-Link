@@ -16,11 +16,13 @@ public class WatchLinkPlugin: CAPPlugin {
 
     @objc func send(_ call: CAPPluginCall) {
         guard let path = call.getString("path") else {
-            return WatchLinkResult(ok: false, error: "Path is required").toDict()
+            call.resolve(WatchLinkResult(ok: false, error: "Path is required").toDict())
+            return
         }
 
         guard let message = call.getString("message") else {
-            return WatchLinkResult(ok: false, error: "Message is required").toDict()
+            call.resolve(WatchLinkResult(ok: false, error: "Message is required").toDict())
+            return
         }
 
         call.resolve(implementation.send(message: message, path: path).toDict())

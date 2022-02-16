@@ -2,6 +2,7 @@ package com.robholden.capacitorwatchlink;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -55,6 +56,8 @@ public class WatchLinkPlugin extends Plugin
             Bundle stuff = msg.getData();
             String path = stuff.getString("path");
             String message = stuff.getString("message");
+
+            Log.d("WatchLinkPlugin.Listen", path + " => " + message);
 
             JSObject ret = new JSObject();
             ret.put(path, message);

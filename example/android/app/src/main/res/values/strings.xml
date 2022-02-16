@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Watch Link Example</string>
+    <string name="title_activity_main">WatchLinkExample</string>
+    <string name="package_name">com.robholden.capacitorwatchlinkexample</string>
+    <string name="custom_url_scheme">com.robholden.capacitorwatchlinkexample</string>
+</resources>

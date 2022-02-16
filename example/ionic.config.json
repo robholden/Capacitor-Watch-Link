@@ -1,0 +1,7 @@
+{
+  "name": "WatchLinkExample",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -32,9 +32,11 @@ npx cap sync
 connected(options?: WatchConnectedOptions | undefined) => Promise<WatchLinkResult>
 ```
 
-| Param         | Type                                                                    |
-| ------------- | ----------------------------------------------------------------------- |
-| **`options`** | <code><a href="#watchconnectedoptions">WatchConnectedOptions</a></code> |
+Returns if there's a watch connected to this device
+
+| Param         | Type                                                                    | Description       |
+| ------------- | ----------------------------------------------------------------------- | ----------------- |
+| **`options`** | <code><a href="#watchconnectedoptions">WatchConnectedOptions</a></code> | connected options |
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
@@ -47,9 +49,14 @@ connected(options?: WatchConnectedOptions | undefined) => Promise<WatchLinkResul
 send(options: WatchSendOptions) => Promise<WatchLinkResult>
 ```
 
-| Param         | Type                                                          |
-| ------------- | ------------------------------------------------------------- |
-| **`options`** | <code><a href="#watchsendoptions">WatchSendOptions</a></code> |
+Sends a message to a connected watch from this device
+
+[WearOS] =&gt; Sent via MessageClient
+[WatchOS] =&gt; Sent via WCSession
+
+| Param         | Type                                                          | Description            |
+| ------------- | ------------------------------------------------------------- | ---------------------- |
+| **`options`** | <code><a href="#watchsendoptions">WatchSendOptions</a></code> | configure data to send |
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
@@ -62,9 +69,14 @@ send(options: WatchSendOptions) => Promise<WatchLinkResult>
 listen(callback: (result: { [key: string]: string; }) => any) => Promise<WatchLinkResult>
 ```
 
-| Param          | Type                                                        |
-| -------------- | ----------------------------------------------------------- |
-| **`callback`** | <code>(result: { [key: string]: string; }) =&gt; any</code> |
+Listens to messages sent from any connected watch to this device
+
+[WearOS] =&gt; Listening via MessageClient
+[WatchOS] =&gt; Listening via WCSession
+
+| Param          | Type                                                        | Description                             |
+| -------------- | ----------------------------------------------------------- | --------------------------------------- |
+| **`callback`** | <code>(result: { [key: string]: string; }) =&gt; any</code> | Callback executed on a received message |
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
@@ -76,6 +88,8 @@ listen(callback: (result: { [key: string]: string; }) => any) => Promise<WatchLi
 ```typescript
 unlisten() => Promise<void>
 ```
+
+Stops listening to messages from any connected watch
 
 --------------------
 

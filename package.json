@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+http://github.com/robholden/capacitor-plugin-watch-link.git"
+    "url": "git+http://github.com/robholden/capacitor-watch-link.git"
   },
   "bugs": {
-    "url": "http://github.com/robholden/capacitor-plugin-watch-link/issues"
+    "url": "http://github.com/robholden/capacitor-watch-link/issues"
   },
   "keywords": [
     "capacitor",

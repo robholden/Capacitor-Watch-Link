@@ -1,4 +1,7 @@
 <ion-app>
+  <ion-header>
+    <ion-toolbar></ion-toolbar>
+  </ion-header>
   <ion-content *ngIf="!unsupported; else unsupportedRef">
     <div class="ion-padding">
       <ion-text [color]="watchIsConnected ? 'success' : 'danger'">

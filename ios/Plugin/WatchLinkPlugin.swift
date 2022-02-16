@@ -25,6 +25,7 @@ public class WatchLinkPlugin: CAPPlugin {
             return
         }
 
+        print("Device says \(path) => \(message)")
         call.resolve(implementation.send(message: message, path: path).toDict())
     }
 
@@ -34,6 +35,7 @@ public class WatchLinkPlugin: CAPPlugin {
 
         _ = implementation.listen() { (message: [String: Any]) -> Void in
             if let callback = self.call {
+                print("Watch says \(message)")
                 callback.resolve(message)
             }
         }

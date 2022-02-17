@@ -4,12 +4,52 @@ A plugin for Capacitor to link an application to WatchOs and WearOs
 
 ## Install
 
-TODO (not ready for production yet)
-
-<!-- ```bash
-npm install capacitor-watch-link
+```bash
+npm install @robholden/capacitor-watch-link
 npx cap sync
-``` -->
+```
+
+## AndroidManifest Setup
+
+- You must ensure the package id matches both your `App` and `Watch` application
+- Register plugin's listener service with defined path prefixes (App `AndroidManifest.xml`)
+
+```
+<service android:name="com.robholden.capacitorwatchlink.WatchLinkWearableListenerService" >
+    <intent-filter>
+    <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+    <data android:scheme="wear" android:host="*" android:pathPrefix="/test-device-path" />
+    </intent-filter>
+</service>
+```
+
+## Example
+
+You can view an example integration in Ionic Angular between both WearOS and WatchOS in `/example` directory
+
+```
+ // Listen to messages from the watch to this device
+WatchLink.listen(data => {
+    // Only handle /test-device-path
+    if (data['/test-device-path']) {
+        var message = dats['/test-device-path']));
+        console.log(message);
+    }
+});
+
+// Poll every 10 seconds to see if there's a connected watch
+timer(0, 10 * 1000).subscribe(async (index: number) => {
+    const result = await WatchLink.connected({ nearbyOnly: true });
+
+    // Send the watch a message
+    if (result.ok) {
+        await WatchLink.send({
+            path: '/test-watch-path',
+            message: `Device says ${index} is my favourite number`,
+        });
+    }
+});
+```
 
 ## API
 

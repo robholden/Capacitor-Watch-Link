@@ -1,19 +1,17 @@
-package com.robholden.capacitorwatchlink;
+package com.capacitorplugin.watchlink;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 
-public class WatchLinkWearableListenerService extends WearableListenerService
-{
+public class WatchLinkWearableListenerService extends WearableListenerService {
+
     static Handler handler;
 
     @Override
-    public void onMessageReceived(MessageEvent messageEvent)
-    {
+    public void onMessageReceived(MessageEvent messageEvent) {
         //This method will call while any message is posted by the watch to the phone.
         //This is message api, so if the phone is not connected message will be lost.
         //No guarantee of the message delivery

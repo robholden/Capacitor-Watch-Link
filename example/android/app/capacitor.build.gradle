@@ -13,7 +13,7 @@ dependencies {
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
     implementation project(':capacitor-status-bar')
-    implementation project(':robholden-capacitor-watch-link')
+    implementation project(':capacitor-plugin-watch-link')
 
 }
 

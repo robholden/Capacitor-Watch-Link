@@ -4,7 +4,7 @@ import { timer } from 'rxjs';
 
 import { Platform } from '@ionic/angular';
 
-import { WatchLink } from '@robholden/capacitor-watch-link';
+import { WatchLink } from 'capacitor-plugin-watch-link';
 
 interface SomeSharedInterface {
   answer: string;

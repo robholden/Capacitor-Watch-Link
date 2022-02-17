@@ -6,7 +6,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.robholden.capacitorwatchlinkexample"
+        applicationId "com.capacitorplugin.watchlinkexample"
         minSdkVersion 30
         targetSdkVersion 30
         versionCode 1

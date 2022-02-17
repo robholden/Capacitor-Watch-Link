@@ -1,4 +1,4 @@
-package com.robholden.capacitorwatchlinkexample;
+package com.capacitorplugin.watchlinkexample;
 
 import com.getcapacitor.BridgeActivity;
 

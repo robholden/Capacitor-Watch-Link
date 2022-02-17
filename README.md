@@ -5,7 +5,7 @@ A plugin for Capacitor to link an application to WatchOs and WearOs
 ## Install
 
 ```bash
-npm install @robholden/capacitor-watch-link
+npm install capacitor-plugin-watch-link
 npx cap sync
 ```
 
@@ -15,7 +15,7 @@ npx cap sync
 - Register plugin's listener service with defined path prefixes (App `AndroidManifest.xml`)
 
 ```
-<service android:name="com.robholden.capacitorwatchlink.WatchLinkWearableListenerService" >
+<service android:name="com.capacitorplugin.watchlink.WatchLinkWearableListenerService" >
     <intent-filter>
     <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
     <data android:scheme="wear" android:host="*" android:pathPrefix="/test-device-path" />

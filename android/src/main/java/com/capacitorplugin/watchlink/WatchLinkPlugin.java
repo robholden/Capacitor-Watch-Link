@@ -22,6 +22,12 @@ public class WatchLinkPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void activate(PluginCall call) {
+        WatchResult result = new WatchResult(true, "");
+        call.resolve(result.ToJson());
+    }
+
+    @PluginMethod
     public void connected(PluginCall call) {
         Boolean nearbyOnly = call.hasOption("nearbyOnly") ? call.getBoolean("nearbyOnly") : false;
         WatchResult result = implementation.connected(nearbyOnly);

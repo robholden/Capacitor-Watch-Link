@@ -20,18 +20,31 @@ class WatchLinkResult {
 
 class WatchLink: NSObject, WCSessionDelegate {
     private let session: WCSession
-    private var callback: ([String: Any]) -> Void = { arg in }
+    private var listenCallback: ([String: Any]) -> Void = { arg in }
+    private var activateCallback: ((WatchLinkResult) -> Void)?
 
     init(session: WCSession = .default) {
         self.session = session
         super.init()
         self.session.delegate = self
-        self.session.activate()
+    }
+    
+    func activate(callback: @escaping (WatchLinkResult) -> Void) -> Void {
+        if (self.session.activationState != .activated) {
+            print("Added activation callback")
+            self.activateCallback = callback
+            self.session.activate()
+        }
+        
+        else {
+            print("Session already activated")
+            callback(WatchLinkResult(ok: true, error: ""))
+        }
     }
 
     func connected() -> WatchLinkResult {
         if (self.session.activationState != WCSessionActivationState.activated) {
-            return WatchLinkResult(ok: false, error: "WCSession is not activated (\(self.session.activationState)")
+            return WatchLinkResult(ok: false, error: "WCSession is not activated")
         }
         
         return WatchLinkResult(ok: self.session.isReachable)
@@ -39,33 +52,48 @@ class WatchLink: NSObject, WCSessionDelegate {
 
     func send(message: String, path: String) -> WatchLinkResult {
         if (self.session.activationState != WCSessionActivationState.activated) {
-            return WatchLinkResult(ok: false, error: "WCSession is not activated (\(self.session.activationState)")
+            return WatchLinkResult(ok: false, error: "WCSession is not activated")
         }
 
-        else if (!self.session.isReachable) {
+        else if (self.session.isReachable == false) {
             return WatchLinkResult(ok: false, error: "Watch is not reachable")
         }
 
-        session.sendMessage([path:message], replyHandler: nil, errorHandler: nil)
+        session.sendMessage([path:message], replyHandler: nil) { (error: Error) -> Void in
+            print ("Device failed to say \(path) => \(message) (\(error.localizedDescription)")
+        }
+        
+        print("Device says \(path) => \(message)")
         return WatchLinkResult(ok: true)
     }
 
     func listen(callback: @escaping ([String: Any]) -> Void) -> WatchLinkResult {
-        self.callback = callback;
+        self.listenCallback = callback;
 
-        return WatchLinkResult(ok: true, error: "FYI: this method will never error")
+        return WatchLinkResult(ok: true, error: "This method will never error")
     }
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        // code
+        if let callback = self.activateCallback {
+            if let e = error {
+                print("Session activation error \(e.localizedDescription)")
+                callback(WatchLinkResult(ok: false, error: e.localizedDescription))
+            } else {
+                print("Session activated")
+                callback(WatchLinkResult(ok: true, error: ""))
+            }
+        }
+        else {
+            print("Activated without callback")
+        }
     }
 
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        self.callback(message)
+        self.listenCallback(message)
     }
 
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-        self.callback(message)
+        self.listenCallback(message)
     }
 
     func sessionDidBecomeInactive(_ session: WCSession) {

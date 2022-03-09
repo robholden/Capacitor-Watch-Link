@@ -34,6 +34,13 @@ export interface WatchSendOptions {
 
 export interface WatchLinkPlugin {
   /**
+   * [WatchOs ONLY]
+   *
+   * Will activate and resolve when the WCSession has been activated
+   */
+  activate(): Promise<WatchLinkResult>;
+
+  /**
    * Returns if there's a watch connected to this device
    *
    * @param options connected options

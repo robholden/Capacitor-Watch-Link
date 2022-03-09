@@ -10,6 +10,12 @@ public class WatchLinkPlugin: CAPPlugin {
     private let implementation = WatchLink()
     private var call: CAPPluginCall?
 
+    @objc func activate(_ call: CAPPluginCall) {
+        implementation.activate() { (result: WatchLinkResult) -> Void in
+            call.resolve(result.toDict())
+        }
+    }
+    
     @objc func connected(_ call: CAPPluginCall) {
         call.resolve(implementation.connected().toDict())
     }
@@ -25,7 +31,6 @@ public class WatchLinkPlugin: CAPPlugin {
             return
         }
 
-        print("Device says \(path) => \(message)")
         call.resolve(implementation.send(message: message, path: path).toDict())
     }
 

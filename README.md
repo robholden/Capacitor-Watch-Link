@@ -55,6 +55,7 @@ timer(0, 10 * 1000).subscribe(async (index: number) => {
 
 <docgen-index>
 
+* [`activate()`](#activate)
 * [`connected(...)`](#connected)
 * [`send(...)`](#send)
 * [`listen(...)`](#listen)
@@ -65,6 +66,21 @@ timer(0, 10 * 1000).subscribe(async (index: number) => {
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
+
+### activate()
+
+```typescript
+activate() => Promise<WatchLinkResult>
+```
+
+[WatchOs ONLY]
+
+Will activate and resolve when the WCSession has been activated
+
+**Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
+
+--------------------
+
 
 ### connected(...)
 

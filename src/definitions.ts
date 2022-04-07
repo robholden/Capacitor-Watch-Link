@@ -1,7 +1,6 @@
-export interface WatchLinkResult {
-  ok: boolean;
-  error: string;
-}
+import type { WearOsDefinitions } from './android';
+import type { WatchOsDefinitions } from './ios';
+import type { WatchLinkResult } from './result';
 
 export interface WatchConnectedOptions {
   /**
@@ -32,14 +31,7 @@ export interface WatchSendOptions {
   nearbyOnly?: boolean;
 }
 
-export interface WatchLinkPlugin {
-  /**
-   * [WatchOs ONLY]
-   *
-   * Will activate and resolve when the WCSession has been activated
-   */
-  activate(): Promise<WatchLinkResult>;
-
+export interface WatchLinkPlugin extends WatchOsDefinitions, WearOsDefinitions {
   /**
    * Returns if there's a watch connected to this device
    *

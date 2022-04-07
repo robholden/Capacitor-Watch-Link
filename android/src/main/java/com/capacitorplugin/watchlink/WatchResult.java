@@ -12,7 +12,7 @@ public class WatchResult {
         this.error = error;
     }
 
-    public JSObject ToJson() {
+    public JSObject toJson() {
         JSObject ret = new JSObject();
 
         ret.put("ok", this.ok);

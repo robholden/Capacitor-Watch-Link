@@ -1,37 +1,19 @@
-import type { WearOsDefinitions } from './android';
-import type { WatchOsDefinitions } from './ios';
+import type {
+  CapabilityOption,
+  PlayStoreOptions,
+  WatchConnectedOptions,
+  WatchSendOptions,
+} from './options';
 import type { WatchLinkResult } from './result';
 
-export interface WatchConnectedOptions {
+export interface WatchLinkPlugin {
   /**
-   * [WearOS ONLY]
+   * [WatchOs ONLY]
    *
-   * Set to [true] to only look for nearby watches
+   * Will activate and resolve when the WCSession has been activated
    */
-  nearbyOnly?: boolean;
-}
+  activate(): Promise<WatchLinkResult>;
 
-export interface WatchSendOptions {
-  /**
-   * [WearOS] => the message prefix
-   * [WatchOs] => the message key
-   */
-  path: string;
-
-  /**
-   * The message to send to the watch(es)
-   */
-  message: string;
-
-  /**
-   * [WearOS ONLY]
-   *
-   * Set to [true] to only send to the nearest connected watch
-   */
-  nearbyOnly?: boolean;
-}
-
-export interface WatchLinkPlugin extends WatchOsDefinitions, WearOsDefinitions {
   /**
    * Returns if there's a watch connected to this device
    *
@@ -65,4 +47,20 @@ export interface WatchLinkPlugin extends WatchOsDefinitions, WearOsDefinitions {
    * Stops listening to messages from any connected watch
    */
   unlisten(): Promise<void>;
+
+  /**
+   * [WearOs ONLY]
+   * Opens the playstore on all watches that do not have the app installed
+   */
+  openPlayStoreOnWatchesWithoutApp(
+    options: PlayStoreOptions,
+  ): Promise<WatchLinkResult>;
+
+  /**
+   * [WearOs ONLY]
+   * Returns whether ANY connected watch has the app installed
+   */
+  hasCompanionAppInstalled(
+    options: CapabilityOption,
+  ): Promise<{ result: boolean }>;
 }

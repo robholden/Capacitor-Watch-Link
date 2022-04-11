@@ -27,27 +27,40 @@ A plugin for Capacitor to link an application to WatchOs and WearOs
 
 You can view an example integration in Ionic Angular between both WearOS and WatchOS in `/example` directory
 
-```
- // Listen to messages from the watch to this device
+```typescript
+// Listen to messages from the watch to this device
 WatchLink.listen(data => {
+
     // Only handle /test-device-path
     if (data['/test-device-path']) {
         var message = dats['/test-device-path']));
         console.log(message);
     }
+
 });
 
-// Poll every 10 seconds to see if there's a connected watch
-timer(0, 10 * 1000).subscribe(async (index: number) => {
-    const result = await WatchLink.connected({ nearbyOnly: true });
+// Activate connection
+WatchLink.activate().then((result) => {
 
-    // Send the watch a message
-    if (result.ok) {
-        await WatchLink.send({
-            path: '/test-watch-path',
-            message: `Device says ${index} is my favourite number`,
-        });
+    // Check activation result
+    if (!result.ok) {
+        alert(`Couldn't activate watch session => ${result.error}`);
+        return;
     }
+
+    // Poll every 10 seconds to see if there's a connected watch
+    timer(0, 10 * 1000).subscribe(async (index: number) => {
+        const result = await WatchLink.connected({ nearbyOnly: true });
+
+        // Send the watch a message
+        if (result.ok) {
+            await WatchLink.send({
+                path: '/test-watch-path',
+                message: `Device says ${index} is my favourite number`,
+            });
+        }
+    });
+
 });
 ```
 
@@ -55,16 +68,34 @@ timer(0, 10 * 1000).subscribe(async (index: number) => {
 
 <docgen-index>
 
-- [`connected(...)`](#connected)
-- [`send(...)`](#send)
-- [`listen(...)`](#listen)
-- [`unlisten()`](#unlisten)
-- [Interfaces](#interfaces)
+* [`activate()`](#activate)
+* [`connected(...)`](#connected)
+* [`send(...)`](#send)
+* [`listen(...)`](#listen)
+* [`unlisten()`](#unlisten)
+* [`openPlayStoreOnWatchesWithoutApp(...)`](#openplaystoreonwatcheswithoutapp)
+* [`hasCompanionAppInstalled(...)`](#hascompanionappinstalled)
+* [Interfaces](#interfaces)
 
 </docgen-index>
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
+
+### activate()
+
+```typescript
+activate() => Promise<WatchLinkResult>
+```
+
+[WatchOs ONLY]
+
+Will activate and resolve when the WCSession has been activated
+
+**Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
+
+--------------------
+
 
 ### connected(...)
 
@@ -80,7 +111,8 @@ Returns if there's a watch connected to this device
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
----
+--------------------
+
 
 ### send(...)
 
@@ -99,7 +131,8 @@ Sends a message to a connected watch from this device
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
----
+--------------------
+
 
 ### listen(...)
 
@@ -118,7 +151,8 @@ Listens to messages sent from any connected watch to this device
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
----
+--------------------
+
 
 ### unlisten()
 
@@ -128,9 +162,47 @@ unlisten() => Promise<void>
 
 Stops listening to messages from any connected watch
 
----
+--------------------
+
+
+### openPlayStoreOnWatchesWithoutApp(...)
+
+```typescript
+openPlayStoreOnWatchesWithoutApp(options: PlayStoreOptions) => Promise<WatchLinkResult>
+```
+
+[WearOs ONLY]
+Opens the playstore on all watches that do not have the app installed
+
+| Param         | Type                                                          |
+| ------------- | ------------------------------------------------------------- |
+| **`options`** | <code><a href="#playstoreoptions">PlayStoreOptions</a></code> |
+
+**Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
+
+--------------------
+
+
+### hasCompanionAppInstalled(...)
+
+```typescript
+hasCompanionAppInstalled(options: CapabilityOption) => Promise<{ result: boolean; }>
+```
+
+[WearOs ONLY]
+Returns whether ANY connected watch has the app installed
+
+| Param         | Type                                                          |
+| ------------- | ------------------------------------------------------------- |
+| **`options`** | <code><a href="#capabilityoption">CapabilityOption</a></code> |
+
+**Returns:** <code>Promise&lt;{ result: boolean; }&gt;</code>
+
+--------------------
+
 
 ### Interfaces
+
 
 #### WatchLinkResult
 
@@ -139,11 +211,13 @@ Stops listening to messages from any connected watch
 | **`ok`**    | <code>boolean</code> |
 | **`error`** | <code>string</code>  |
 
+
 #### WatchConnectedOptions
 
 | Prop             | Type                 | Description                                                 |
 | ---------------- | -------------------- | ----------------------------------------------------------- |
 | **`nearbyOnly`** | <code>boolean</code> | [WearOS ONLY] Set to [true] to only look for nearby watches |
+
 
 #### WatchSendOptions
 
@@ -152,5 +226,19 @@ Stops listening to messages from any connected watch
 | **`path`**       | <code>string</code>  | [WearOS] =&gt; the message prefix [WatchOs] =&gt; the message key       |
 | **`message`**    | <code>string</code>  | The message to send to the watch(es)                                    |
 | **`nearbyOnly`** | <code>boolean</code> | [WearOS ONLY] Set to [true] to only send to the nearest connected watch |
+
+
+#### PlayStoreOptions
+
+| Prop                  | Type                | Description                |
+| --------------------- | ------------------- | -------------------------- |
+| **`playStoreAppUri`** | <code>string</code> | The play store uri to open |
+
+
+#### CapabilityOption
+
+| Prop               | Type                | Description                  |
+| ------------------ | ------------------- | ---------------------------- |
+| **`capabilityId`** | <code>string</code> | Watches capability id to use |
 
 </docgen-api>

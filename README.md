@@ -2,11 +2,11 @@
 
 A plugin for Capacitor to link an application to WatchOs and WearOs
 
-## Install
+## TODO: Install
 
 ```bash
-npm install capacitor-plugin-watch-link
-npx cap sync
+#npm install capacitor-plugin-watch-link
+#npx cap sync
 ```
 
 ## AndroidManifest Setup
@@ -55,11 +55,11 @@ timer(0, 10 * 1000).subscribe(async (index: number) => {
 
 <docgen-index>
 
-* [`connected(...)`](#connected)
-* [`send(...)`](#send)
-* [`listen(...)`](#listen)
-* [`unlisten()`](#unlisten)
-* [Interfaces](#interfaces)
+- [`connected(...)`](#connected)
+- [`send(...)`](#send)
+- [`listen(...)`](#listen)
+- [`unlisten()`](#unlisten)
+- [Interfaces](#interfaces)
 
 </docgen-index>
 
@@ -80,8 +80,7 @@ Returns if there's a watch connected to this device
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
---------------------
-
+---
 
 ### send(...)
 
@@ -100,8 +99,7 @@ Sends a message to a connected watch from this device
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
---------------------
-
+---
 
 ### listen(...)
 
@@ -120,8 +118,7 @@ Listens to messages sent from any connected watch to this device
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 
---------------------
-
+---
 
 ### unlisten()
 
@@ -131,11 +128,9 @@ unlisten() => Promise<void>
 
 Stops listening to messages from any connected watch
 
---------------------
-
+---
 
 ### Interfaces
-
 
 #### WatchLinkResult
 
@@ -144,13 +139,11 @@ Stops listening to messages from any connected watch
 | **`ok`**    | <code>boolean</code> |
 | **`error`** | <code>string</code>  |
 
-
 #### WatchConnectedOptions
 
 | Prop             | Type                 | Description                                                 |
 | ---------------- | -------------------- | ----------------------------------------------------------- |
 | **`nearbyOnly`** | <code>boolean</code> | [WearOS ONLY] Set to [true] to only look for nearby watches |
-
 
 #### WatchSendOptions
 

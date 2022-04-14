@@ -42,12 +42,20 @@ class WatchLink: NSObject, WCSessionDelegate {
         }
     }
 
-    func connected() -> WatchLinkResult {
+    func paired() -> WatchLinkResult {
         if (self.session.activationState != WCSessionActivationState.activated) {
             return WatchLinkResult(ok: false, error: "WCSession is not activated")
         }
         
-        return WatchLinkResult(ok: self.session.isReachable)
+        return WatchLinkResult(ok: self.session.isPaired)
+    }
+    
+    func installed() -> Bool {
+        if (self.session.activationState != WCSessionActivationState.activated) {
+            return false
+        }
+        
+        return self.session.isWatchAppInstalled
     }
 
     func send(message: String, path: String) -> WatchLinkResult {
@@ -55,6 +63,14 @@ class WatchLink: NSObject, WCSessionDelegate {
             return WatchLinkResult(ok: false, error: "WCSession is not activated")
         }
 
+        else if (self.session.isPaired == false) {
+            return WatchLinkResult(ok: false, error: "Watch is not paired")
+        }
+        
+        else if (self.session.isWatchAppInstalled == false) {
+            return WatchLinkResult(ok: false, error: "Watch app is not installed")
+        }
+        
         else if (self.session.isReachable == false) {
             return WatchLinkResult(ok: false, error: "Watch is not reachable")
         }

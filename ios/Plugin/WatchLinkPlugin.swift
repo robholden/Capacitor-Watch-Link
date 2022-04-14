@@ -16,8 +16,8 @@ public class WatchLinkPlugin: CAPPlugin {
         }
     }
     
-    @objc func connected(_ call: CAPPluginCall) {
-        call.resolve(implementation.connected().toDict())
+    @objc func paired(_ call: CAPPluginCall) {
+        call.resolve(implementation.paired().toDict())
     }
 
     @objc func send(_ call: CAPPluginCall) {
@@ -52,6 +52,14 @@ public class WatchLinkPlugin: CAPPlugin {
             self.call = nil;
         }
 
-        call.resolve();
+        call.resolve()
+    }
+    
+    @objc func hasCompanionAppInstalled(_ call: CAPPluginCall) {
+        call.resolve(["result": implementation.installed()])
+    }
+    
+    @objc func openPlayStoreOnWatchesWithoutApp(_ call: CAPPluginCall) {
+        call.unimplemented("Not implemented on iOS.")
     }
 }

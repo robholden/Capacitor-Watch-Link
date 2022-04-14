@@ -90,7 +90,7 @@ public class WatchLink
         return result;
     }
 
-    public WatchResult connected(Boolean nearbyOnly)
+    public WatchResult paired(Boolean nearbyOnly)
     {
         List<Node> nodes = getNodes(nearbyOnly);
         return new WatchResult(nodes.size() > 0, "");

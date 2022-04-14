@@ -15,11 +15,11 @@ export interface WatchLinkPlugin {
   activate(): Promise<WatchLinkResult>;
 
   /**
-   * Returns if there's a watch connected to this device
+   * Returns if there's a watch paired to this device
    *
    * @param options connected options
    */
-  connected(options?: WatchConnectedOptions): Promise<WatchLinkResult>;
+  paired(options?: WatchConnectedOptions): Promise<WatchLinkResult>;
 
   /**
    * Sends a message to a connected watch from this device
@@ -57,7 +57,6 @@ export interface WatchLinkPlugin {
   ): Promise<WatchLinkResult>;
 
   /**
-   * [WearOs ONLY]
    * Returns whether ANY connected watch has the app installed
    */
   hasCompanionAppInstalled(

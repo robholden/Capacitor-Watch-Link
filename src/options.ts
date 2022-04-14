@@ -29,9 +29,10 @@ export interface WatchSendOptions {
 
 export interface CapabilityOption {
   /**
+   * [WearOs ONLY]
    * Watches capability id to use
    */
-  capabilityId: string;
+  capabilityId?: string;
 }
 
 export interface PlayStoreOptions extends CapabilityOption {

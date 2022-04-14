@@ -69,7 +69,7 @@ WatchLink.activate().then((result) => {
 <docgen-index>
 
 * [`activate()`](#activate)
-* [`connected(...)`](#connected)
+* [`paired(...)`](#paired)
 * [`send(...)`](#send)
 * [`listen(...)`](#listen)
 * [`unlisten()`](#unlisten)
@@ -97,13 +97,13 @@ Will activate and resolve when the WCSession has been activated
 --------------------
 
 
-### connected(...)
+### paired(...)
 
 ```typescript
-connected(options?: WatchConnectedOptions | undefined) => Promise<WatchLinkResult>
+paired(options?: WatchConnectedOptions | undefined) => Promise<WatchLinkResult>
 ```
 
-Returns if there's a watch connected to this device
+Returns if there's a watch paired to this device
 
 | Param         | Type                                                                    | Description       |
 | ------------- | ----------------------------------------------------------------------- | ----------------- |
@@ -189,7 +189,6 @@ Opens the playstore on all watches that do not have the app installed
 hasCompanionAppInstalled(options: CapabilityOption) => Promise<{ result: boolean; }>
 ```
 
-[WearOs ONLY]
 Returns whether ANY connected watch has the app installed
 
 | Param         | Type                                                          |
@@ -237,8 +236,8 @@ Returns whether ANY connected watch has the app installed
 
 #### CapabilityOption
 
-| Prop               | Type                | Description                  |
-| ------------------ | ------------------- | ---------------------------- |
-| **`capabilityId`** | <code>string</code> | Watches capability id to use |
+| Prop               | Type                | Description                                |
+| ------------------ | ------------------- | ------------------------------------------ |
+| **`capabilityId`** | <code>string</code> | [WearOs ONLY] Watches capability id to use |
 
 </docgen-api>

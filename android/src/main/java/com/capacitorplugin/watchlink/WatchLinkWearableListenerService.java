@@ -16,17 +16,22 @@ public class WatchLinkWearableListenerService extends WearableListenerService {
 
     @Override
     public void onMessageReceived(@NonNull MessageEvent messageEvent) {
-        //This method will call while any message is posted by the watch to the phone.
-        //This is message api, so if the phone is not connected message will be lost.
-        //No guarantee of the message delivery
-        Bundle bundle = new Bundle();
-        bundle.putString("path", messageEvent.getPath());
-        bundle.putString("message", new String(messageEvent.getData()));
-        Message msg = handler.obtainMessage();
-        msg.setData(bundle);
+        try {
+            if (handler == null) return;
 
-        Log.d("WatchLinkWearableListenerService.Received", msg.toString());
+            //This method will call while any message is posted by the watch to the phone.
+            //This is message api, so if the phone is not connected message will be lost.
+            //No guarantee of the message delivery
+            Bundle bundle = new Bundle();
+            bundle.putString("path", messageEvent.getPath());
+            bundle.putString("message", new String(messageEvent.getData()));
+            Message msg = handler.obtainMessage();
+            msg.setData(bundle);
 
-        if (handler != null) handler.sendMessage(msg);
+            Log.d("WatchLinkWearableListenerService.Received", msg.toString());
+            handler.sendMessage(msg);
+        } catch (Exception exception) {
+            Log.d("WearableListenerService.onMessageReceivedError", exception.getLocalizedMessage());
+        }
     }
 }

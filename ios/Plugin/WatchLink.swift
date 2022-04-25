@@ -70,10 +70,6 @@ class WatchLink: NSObject, WCSessionDelegate {
         else if (self.session.isWatchAppInstalled == false) {
             return WatchLinkResult(ok: false, error: "Watch app is not installed")
         }
-        
-        else if (self.session.isReachable == false) {
-            return WatchLinkResult(ok: false, error: "Watch is not reachable")
-        }
 
         session.sendMessage([path:message], replyHandler: nil) { (error: Error) -> Void in
             print ("Device failed to say \(path) => \(message) (\(error.localizedDescription)")

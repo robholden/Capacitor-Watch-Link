@@ -28,10 +28,10 @@ public class WatchLinkWearableListenerService extends WearableListenerService {
             Message msg = handler.obtainMessage();
             msg.setData(bundle);
 
-            Log.d("WatchLinkWearableListenerService.Received", msg.toString());
+            Log.d("WatchLink.Received", msg.toString());
             handler.sendMessage(msg);
         } catch (Exception exception) {
-            Log.d("WearableListenerService.onMessageReceivedError", exception.getLocalizedMessage());
+            Log.d("WatchLink.ReceivedError", exception.getLocalizedMessage());
         }
     }
 }

@@ -1,0 +1,247 @@
+{
+  "api": {
+    "name": "WatchLinkPlugin",
+    "slug": "watchlinkplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "activate",
+        "signature": "() => Promise<WatchLinkResult>",
+        "parameters": [],
+        "returns": "Promise<WatchLinkResult>",
+        "tags": [],
+        "docs": "[WatchOs ONLY]\r\n\r\nWill activate and resolve when the WCSession has been activated",
+        "complexTypes": [
+          "WatchLinkResult"
+        ],
+        "slug": "activate"
+      },
+      {
+        "name": "paired",
+        "signature": "(options?: WatchConnectedOptions | undefined) => Promise<WatchLinkResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "connected options",
+            "type": "WatchConnectedOptions | undefined"
+          }
+        ],
+        "returns": "Promise<WatchLinkResult>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "options connected options"
+          }
+        ],
+        "docs": "Returns if there's a watch paired to this device",
+        "complexTypes": [
+          "WatchLinkResult",
+          "WatchConnectedOptions"
+        ],
+        "slug": "paired"
+      },
+      {
+        "name": "send",
+        "signature": "(options: WatchSendOptions) => Promise<WatchLinkResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "configure data to send",
+            "type": "WatchSendOptions"
+          }
+        ],
+        "returns": "Promise<WatchLinkResult>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "options configure data to send"
+          }
+        ],
+        "docs": "Sends a message to a connected watch from this device\r\n\r\n[WearOS] => Sent via MessageClient\r\n[WatchOS] => Sent via WCSession",
+        "complexTypes": [
+          "WatchLinkResult",
+          "WatchSendOptions"
+        ],
+        "slug": "send"
+      },
+      {
+        "name": "listen",
+        "signature": "(callback: (result: { [key: string]: string; }) => any) => Promise<WatchLinkResult>",
+        "parameters": [
+          {
+            "name": "callback",
+            "docs": "Callback executed on a received message",
+            "type": "(result: { [key: string]: string; }) => any"
+          }
+        ],
+        "returns": "Promise<WatchLinkResult>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "callback Callback executed on a received message"
+          }
+        ],
+        "docs": "Listens to messages sent from any connected watch to this device\r\n\r\n[WearOS] => Listening via MessageClient\r\n[WatchOS] => Listening via WCSession",
+        "complexTypes": [
+          "WatchLinkResult"
+        ],
+        "slug": "listen"
+      },
+      {
+        "name": "unlisten",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [],
+        "docs": "Stops listening to messages from any connected watch",
+        "complexTypes": [],
+        "slug": "unlisten"
+      },
+      {
+        "name": "openPlayStoreOnWatchesWithoutApp",
+        "signature": "(options: PlayStoreOptions) => Promise<WatchLinkResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "PlayStoreOptions"
+          }
+        ],
+        "returns": "Promise<WatchLinkResult>",
+        "tags": [],
+        "docs": "[WearOs ONLY]\r\nOpens the playstore on all watches that do not have the app installed",
+        "complexTypes": [
+          "WatchLinkResult",
+          "PlayStoreOptions"
+        ],
+        "slug": "openplaystoreonwatcheswithoutapp"
+      },
+      {
+        "name": "hasCompanionAppInstalled",
+        "signature": "(options: CapabilityOption) => Promise<{ result: boolean; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "CapabilityOption"
+          }
+        ],
+        "returns": "Promise<{ result: boolean; }>",
+        "tags": [],
+        "docs": "Returns whether ANY connected watch has the app installed",
+        "complexTypes": [
+          "CapabilityOption"
+        ],
+        "slug": "hascompanionappinstalled"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "WatchLinkResult",
+      "slug": "watchlinkresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "ok",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "error",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "WatchConnectedOptions",
+      "slug": "watchconnectedoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "nearbyOnly",
+          "tags": [],
+          "docs": "[WearOS ONLY]\r\n\r\nSet to [true] to only look for nearby watches",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        }
+      ]
+    },
+    {
+      "name": "WatchSendOptions",
+      "slug": "watchsendoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "path",
+          "tags": [],
+          "docs": "[WearOS] => the message prefix\r\n[WatchOs] => the message key",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "message",
+          "tags": [],
+          "docs": "The message to send to the watch(es)",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "nearbyOnly",
+          "tags": [],
+          "docs": "[WearOS ONLY]\r\n\r\nSet to [true] to only send to the nearest connected watch",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        }
+      ]
+    },
+    {
+      "name": "PlayStoreOptions",
+      "slug": "playstoreoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "playStoreAppUri",
+          "tags": [],
+          "docs": "The play store uri to open",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "CapabilityOption",
+      "slug": "capabilityoption",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "capabilityId",
+          "tags": [],
+          "docs": "[WearOs ONLY]\r\nWatches capability id to use",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [],
+  "pluginConfigs": []
+}

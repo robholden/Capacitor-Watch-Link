@@ -28,33 +28,41 @@ class WatchLink: NSObject, WCSessionDelegate {
         super.init()
         self.session.delegate = self
     }
-    
+
     func activate(callback: @escaping (WatchLinkResult) -> Void) -> Void {
         if (self.session.activationState != .activated) {
             print("Added activation callback")
             self.activateCallback = callback
             self.session.activate()
         }
-        
+
         else {
             print("Session already activated")
             callback(WatchLinkResult(ok: true, error: ""))
         }
     }
 
+    func reachable() -> WatchLinkResult {
+        if (self.session.activationState != WCSessionActivationState.activated) {
+            return WatchLinkResult(ok: false, error: "WCSession is not activated")
+        }
+
+        return WatchLinkResult(ok: self.session.isReachable)
+    }
+
     func paired() -> WatchLinkResult {
         if (self.session.activationState != WCSessionActivationState.activated) {
             return WatchLinkResult(ok: false, error: "WCSession is not activated")
         }
-        
+
         return WatchLinkResult(ok: self.session.isPaired)
     }
-    
+
     func installed() -> Bool {
         if (self.session.activationState != WCSessionActivationState.activated) {
             return false
         }
-        
+
         return self.session.isWatchAppInstalled
     }
 
@@ -66,15 +74,19 @@ class WatchLink: NSObject, WCSessionDelegate {
         else if (self.session.isPaired == false) {
             return WatchLinkResult(ok: false, error: "Watch is not paired")
         }
-        
+
         else if (self.session.isWatchAppInstalled == false) {
             return WatchLinkResult(ok: false, error: "Watch app is not installed")
+        }
+
+        else if (self.session.isReachable == false) {
+            return WatchLinkResult(ok: false, error: "Watch app is not in the foreground")
         }
 
         session.sendMessage([path:message], replyHandler: nil) { (error: Error) -> Void in
             print ("Device failed to say \(path) => \(message) (\(error.localizedDescription)")
         }
-        
+
         print("Device says \(path) => \(message)")
         return WatchLinkResult(ok: true)
     }

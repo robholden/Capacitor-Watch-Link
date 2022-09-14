@@ -5,6 +5,7 @@
 // each method the plugin supports using the CAP_PLUGIN_METHOD macro.
 CAP_PLUGIN(WatchLinkPlugin, "WatchLink",
            CAP_PLUGIN_METHOD(activate, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(reachable, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(paired, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(send, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(listen, CAPPluginReturnCallback);

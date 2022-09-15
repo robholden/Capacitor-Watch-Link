@@ -70,6 +70,7 @@ WatchLink.activate().then((result) => {
 
 * [`activate()`](#activate)
 * [`paired(...)`](#paired)
+* [`reachable()`](#reachable)
 * [`send(...)`](#send)
 * [`listen(...)`](#listen)
 * [`unlisten()`](#unlisten)
@@ -108,6 +109,20 @@ Returns if there's a watch paired to this device
 | Param         | Type                                                                    | Description       |
 | ------------- | ----------------------------------------------------------------------- | ----------------- |
 | **`options`** | <code><a href="#watchconnectedoptions">WatchConnectedOptions</a></code> | connected options |
+
+**Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
+
+--------------------
+
+
+### reachable()
+
+```typescript
+reachable() => Promise<WatchLinkResult>
+```
+
+[WatchOs ONLY]
+Returns if the watch is reachable to this device
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>
 

@@ -90,6 +90,11 @@ public class WatchLink
         return result;
     }
 
+    public WatchResult reachable()
+    {
+        return paired(true);
+    }
+
     public WatchResult paired(Boolean nearbyOnly)
     {
         List<Node> nodes = getNodes(nearbyOnly);

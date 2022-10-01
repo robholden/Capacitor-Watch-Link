@@ -22,7 +22,7 @@ export interface WatchLinkPlugin {
   paired(options?: WatchConnectedOptions): Promise<WatchLinkResult>;
 
   /**
-   * [WatchOs ONLY]
+   * [WatchOS ONLY]
    * Returns if the watch is reachable to this device
    */
   reachable(): Promise<WatchLinkResult>;

@@ -14,6 +14,11 @@ export interface WatchLinkPlugin {
      */
     paired(options?: WatchConnectedOptions): Promise<WatchLinkResult>;
     /**
+     * [WatchOS ONLY]
+     * Returns if the watch is reachable to this device
+     */
+    reachable(): Promise<WatchLinkResult>;
+    /**
      * Sends a message to a connected watch from this device
      *
      * [WearOS] => Sent via MessageClient

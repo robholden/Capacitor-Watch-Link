@@ -34,6 +34,14 @@ export class AppComponent {
   }
 
   private async setupWatchEvents() {
+    const activated = await WatchLink.activate();
+    this.watchIsConnected = false;
+
+    if (!activated.ok) {
+      alert(`Couldn't activate watch session => ${activated.error}`);
+      return;
+    }
+
     // Listen to messages from the watch to this device
     WatchLink.listen(message => {
       // Only handle /test-device-path
@@ -43,7 +51,7 @@ export class AppComponent {
 
     // Poll every 10 seconds to see if there's a connected watch
     timer(0, 10 * 1000).subscribe(async (index: number) => {
-      const result = await WatchLink.connected({ nearbyOnly: true });
+      const result = await WatchLink.paired({ nearbyOnly: true });
       this.watchIsConnected = result.ok;
 
       // Send the watch a message

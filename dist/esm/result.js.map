@@ -1,1 +1,1 @@
-{"version":3,"file":"result.js","sourceRoot":"","sources":["../../src/result.ts"],"names":[],"mappings":"","sourcesContent":["export interface WatchLinkResult {\r\n  ok: boolean;\r\n  error: string;\r\n}\r\n"]}
+{"version":3,"file":"result.js","sourceRoot":"","sources":["../../src/result.ts"],"names":[],"mappings":"","sourcesContent":["export interface WatchLinkResult {\n  ok: boolean;\n  error: string;\n}\n"]}

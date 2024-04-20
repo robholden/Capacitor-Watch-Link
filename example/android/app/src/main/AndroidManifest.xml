@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.capacitorplugin.watchlinkexample">
+    >
 
     <application
         android:allowBackup="true"
@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
+        <activity android:exported="true"            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name="com.capacitorplugin.watchlinkexample.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
@@ -34,7 +33,7 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
 
-        <service android:name="com.capacitorplugin.watchlink.WatchLinkWearableListenerService" >
+        <service android:name="com.capacitorplugin.watchlink.WatchLinkWearableListenerService" android:exported="true">
           <intent-filter>
             <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
             <data android:scheme="wear" android:host="*" android:pathPrefix="/test-device-path" />

@@ -3,7 +3,8 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    namespace "com.capacitorplugin.watchlinkexample"
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "com.capacitorplugin.watchlinkexample"

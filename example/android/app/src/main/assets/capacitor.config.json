@@ -1,6 +1,5 @@
 {
 	"appId": "io.ionic.starter",
 	"appName": "WatchLinkExample",
-	"webDir": "www",
-	"bundledWebRuntime": false
+	"webDir": "www/browser"
 }

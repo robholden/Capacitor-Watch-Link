@@ -1,6 +1,13 @@
 {
 	"appId": "io.ionic.starter",
 	"appName": "WatchLinkExample",
-	"webDir": "www",
-	"bundledWebRuntime": false
+	"webDir": "www/browser",
+	"bundledWebRuntime": false,
+	"packageClassList": [
+		"AppPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"StatusBarPlugin",
+		"WatchLinkPlugin"
+	]
 }

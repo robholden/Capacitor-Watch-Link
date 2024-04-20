@@ -11,7 +11,7 @@
         "parameters": [],
         "returns": "Promise<WatchLinkResult>",
         "tags": [],
-        "docs": "[WatchOs ONLY]\r\n\r\nWill activate and resolve when the WCSession has been activated",
+        "docs": "[WatchOs ONLY]\n\nWill activate and resolve when the WCSession has been activated",
         "complexTypes": [
           "WatchLinkResult"
         ],
@@ -42,6 +42,18 @@
         "slug": "paired"
       },
       {
+        "name": "reachable",
+        "signature": "() => Promise<WatchLinkResult>",
+        "parameters": [],
+        "returns": "Promise<WatchLinkResult>",
+        "tags": [],
+        "docs": "[WatchOS ONLY]\nReturns if the watch is reachable to this device",
+        "complexTypes": [
+          "WatchLinkResult"
+        ],
+        "slug": "reachable"
+      },
+      {
         "name": "send",
         "signature": "(options: WatchSendOptions) => Promise<WatchLinkResult>",
         "parameters": [
@@ -58,7 +70,7 @@
             "text": "options configure data to send"
           }
         ],
-        "docs": "Sends a message to a connected watch from this device\r\n\r\n[WearOS] => Sent via MessageClient\r\n[WatchOS] => Sent via WCSession",
+        "docs": "Sends a message to a connected watch from this device\n\n[WearOS] => Sent via MessageClient\n[WatchOS] => Sent via WCSession",
         "complexTypes": [
           "WatchLinkResult",
           "WatchSendOptions"
@@ -82,7 +94,7 @@
             "text": "callback Callback executed on a received message"
           }
         ],
-        "docs": "Listens to messages sent from any connected watch to this device\r\n\r\n[WearOS] => Listening via MessageClient\r\n[WatchOS] => Listening via WCSession",
+        "docs": "Listens to messages sent from any connected watch to this device\n\n[WearOS] => Listening via MessageClient\n[WatchOS] => Listening via WCSession",
         "complexTypes": [
           "WatchLinkResult"
         ],
@@ -110,7 +122,7 @@
         ],
         "returns": "Promise<WatchLinkResult>",
         "tags": [],
-        "docs": "[WearOs ONLY]\r\nOpens the playstore on all watches that do not have the app installed",
+        "docs": "[WearOs ONLY]\nOpens the playstore on all watches that do not have the app installed",
         "complexTypes": [
           "WatchLinkResult",
           "PlayStoreOptions"
@@ -172,7 +184,7 @@
         {
           "name": "nearbyOnly",
           "tags": [],
-          "docs": "[WearOS ONLY]\r\n\r\nSet to [true] to only look for nearby watches",
+          "docs": "[WearOS ONLY]\n\nSet to [true] to only look for nearby watches",
           "complexTypes": [],
           "type": "boolean | undefined"
         }
@@ -188,7 +200,7 @@
         {
           "name": "path",
           "tags": [],
-          "docs": "[WearOS] => the message prefix\r\n[WatchOs] => the message key",
+          "docs": "[WearOS] => the message prefix\n[WatchOs] => the message key",
           "complexTypes": [],
           "type": "string"
         },
@@ -202,7 +214,7 @@
         {
           "name": "nearbyOnly",
           "tags": [],
-          "docs": "[WearOS ONLY]\r\n\r\nSet to [true] to only send to the nearest connected watch",
+          "docs": "[WearOS ONLY]\n\nSet to [true] to only send to the nearest connected watch",
           "complexTypes": [],
           "type": "boolean | undefined"
         }
@@ -234,7 +246,7 @@
         {
           "name": "capabilityId",
           "tags": [],
-          "docs": "[WearOs ONLY]\r\nWatches capability id to use",
+          "docs": "[WearOs ONLY]\nWatches capability id to use",
           "complexTypes": [],
           "type": "string | undefined"
         }

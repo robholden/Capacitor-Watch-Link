@@ -15,7 +15,7 @@ A plugin for Capacitor to link an application to WatchOs and WearOs
 - Register plugin's listener service with defined path prefixes (App `AndroidManifest.xml`)
 
 ```
-<service android:name="com.capacitorplugin.watchlink.WatchLinkWearableListenerService" >
+<service android:name="com.capacitorplugin.watchlink.WatchLinkWearableListenerService" android:exported="true">
     <intent-filter>
     <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
     <data android:scheme="wear" android:host="*" android:pathPrefix="/test-device-path" />
@@ -50,7 +50,7 @@ WatchLink.activate().then((result) => {
 
     // Poll every 10 seconds to see if there's a connected watch
     timer(0, 10 * 1000).subscribe(async (index: number) => {
-        const result = await WatchLink.connected({ nearbyOnly: true });
+        const result = await WatchLink.paired({ nearbyOnly: true });
 
         // Send the watch a message
         if (result.ok) {
@@ -121,7 +121,7 @@ Returns if there's a watch paired to this device
 reachable() => Promise<WatchLinkResult>
 ```
 
-[WatchOs ONLY]
+[WatchOS ONLY]
 Returns if the watch is reachable to this device
 
 **Returns:** <code>Promise&lt;<a href="#watchlinkresult">WatchLinkResult</a>&gt;</code>

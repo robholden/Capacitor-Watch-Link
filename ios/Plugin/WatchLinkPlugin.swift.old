@@ -6,19 +6,7 @@ import Capacitor
  * here: https://capacitorjs.com/docs/plugins/ios
  */
 @objc(WatchLinkPlugin)
-public class WatchLinkPlugin: CAPPlugin, CAPBridgedPlugin {
-    public let identifier = "WatchLinkPlugin" 
-    public let jsName = "WatchLink" 
-    public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "activate", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "reachable", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "paired", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "send", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "listen", returnType: CAPPluginReturnCallback),
-        CAPPluginMethod(name: "unlisten", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "hasCompanionAppInstalled", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "openPlayStoreOnWatchesWithoutApp", returnType: CAPPluginReturnPromise),
-    ] 
+public class WatchLinkPlugin: CAPPlugin {
     private let implementation = WatchLink()
     private var call: CAPPluginCall?
 
